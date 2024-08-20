@@ -1,0 +1,963 @@
+Microsoft Windows [Version 10.0.22621.1992]
+(c) Microsoft Corporation. All rights reserved.
+
+C:\Users\Addyv>cd..
+
+C:\Users>cd..
+
+C:\>cd xampp
+
+C:\xampp>cd mysql
+
+C:\xampp\mysql>cd bin
+
+C:\xampp\mysql\bin>mysql.exe -uroot
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| info               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| shop               |
++--------------------+
+6 rows in set (0.011 sec)
+
+MariaDB [(none)]> create databases chemist;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'databases chemist' at line 1
+MariaDB [(none)]> use test;
+ERROR 1049 (42000): Unknown database 'test'
+MariaDB [(none)]> show database chemist;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'database chemist' at line 1
+MariaDB [(none)]> show databases chemist;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chemist' at line 1
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| info               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| shop               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> create database chemist;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> show databases chemist;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'chemist' at line 1
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| chemist            |
+| info               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| shop               |
++--------------------+
+7 rows in set (0.001 sec)
+
+MariaDB [(none)]> use text;
+ERROR 1049 (42000): Unknown database 'text'
+MariaDB [(none)]> use chemist;
+Database changed
+MariaDB [chemist]> show tables;
+Empty set (0.001 sec)
+
+MariaDB [chemist]> create  table product(name varchar(200),price int,type varchar(200));
+Query OK, 0 rows affected (0.015 sec)
+
+MariaDB [chemist]> show tables;
++-------------------+
+| Tables_in_chemist |
++-------------------+
+| product           |
++-------------------+
+1 row in set (0.001 sec)
+
+MariaDB [chemist]> desc product;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| name  | varchar(200) | YES  |     | NULL    |       |
+| price | int(11)      | YES  |     | NULL    |       |
+| type  | varchar(200) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.016 sec)
+
+MariaDB [chemist]> select * from product;
+Empty set (0.003 sec)
+
+MariaDB [chemist]> insert into product values('pen',10,'stationary');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [chemist]> select * from product;
++------+-------+------------+
+| name | price | type       |
++------+-------+------------+
+| pen  |    10 | stationary |
++------+-------+------------+
+1 row in set (0.000 sec)
+
+MariaDB [chemist]> select name,price from product;
++------+-------+
+| name | price |
++------+-------+
+| pen  |    10 |
++------+-------+
+1 row in set (0.001 sec)
+
+MariaDB [chemist]> create table rt like product;
+Query OK, 0 rows affected (0.018 sec)
+
+MariaDB [chemist]> select * from product;
++------+-------+------------+
+| name | price | type       |
++------+-------+------------+
+| pen  |    10 | stationary |
++------+-------+------------+
+1 row in set (0.001 sec)
+
+MariaDB [chemist]> select * from rt;
+Empty set (0.001 sec)
+
+MariaDB [chemist]> insert into rt select * from product;
+Query OK, 1 row affected (0.005 sec)
+Records: 1  Duplicates: 0  Warnings: 0
+
+MariaDB [chemist]> select * from rt;
++------+-------+------------+
+| name | price | type       |
++------+-------+------------+
+| pen  |    10 | stationary |
++------+-------+------------+
+1 row in set (0.001 sec)
+
+MariaDB [chemist]> select * from product;
++------+-------+------------+
+| name | price | type       |
++------+-------+------------+
+| pen  |    10 | stationary |
++------+-------+------------+
+1 row in set (0.001 sec)
+
+MariaDB [chemist]> insert into product values('shirt',10,'cloth');
+Query OK, 1 row affected (0.068 sec)
+
+MariaDB [chemist]> select * from product;
++-------+-------+------------+
+| name  | price | type       |
++-------+-------+------------+
+| pen   |    10 | stationary |
+| shirt |    10 | cloth      |
++-------+-------+------------+
+2 rows in set (0.001 sec)
+
+MariaDB [chemist]> insert into product values('pencil',10,'stationary');
+Query OK, 1 row affected (0.068 sec)
+
+MariaDB [chemist]> select name,price from product;
++--------+-------+
+| name   | price |
++--------+-------+
+| pen    |    10 |
+| shirt  |    10 |
+| pencil |    10 |
++--------+-------+
+3 rows in set (0.001 sec)
+
+MariaDB [chemist]> select * from product;
++--------+-------+------------+
+| name   | price | type       |
++--------+-------+------------+
+| pen    |    10 | stationary |
+| shirt  |    10 | cloth      |
+| pencil |    10 | stationary |
++--------+-------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [chemist]> select name as Product_Name,price as Product_price,type as Product_type from product;
++--------------+---------------+--------------+
+| Product_Name | Product_price | Product_type |
++--------------+---------------+--------------+
+| pen          |            10 | stationary   |
+| shirt        |            10 | cloth        |
+| pencil       |            10 | stationary   |
++--------------+---------------+--------------+
+3 rows in set (0.001 sec)
+
+MariaDB [chemist]> select * from product;
++--------+-------+------------+
+| name   | price | type       |
++--------+-------+------------+
+| pen    |    10 | stationary |
+| shirt  |    10 | cloth      |
+| pencil |    10 | stationary |
++--------+-------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [chemist]> insert into product values('pen',213,'asdf');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [chemist]> create table student(name varchar(200),roll int primary key,branch varchar(200));
+Query OK, 0 rows affected (0.093 sec)
+
+MariaDB [chemist]> insert into student values('Rohan',213,'civil');
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [chemist]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| chemist            |
+| info               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| shop               |
++--------------------+
+7 rows in set (0.001 sec)
+
+MariaDB [chemist]> show database chemist;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'database chemist' at line 1
+MariaDB [chemist]> select * from product;
++--------+-------+------------+
+| name   | price | type       |
++--------+-------+------------+
+| pen    |    10 | stationary |
+| shirt  |    10 | cloth      |
+| pencil |    10 | stationary |
+| pen    |   213 | asdf       |
++--------+-------+------------+
+4 rows in set (0.001 sec)
+
+MariaDB [chemist]> create table info;
+ERROR 1113 (42000): A table must have at least 1 column
+MariaDB [chemist]> create table info(sno varchar(200),roll int primary key,name varchar(200);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [chemist]> create table info(name varchar(200),roll int primary key,sno varchar(200);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 1
+MariaDB [chemist]> create table info(name varchar(200),price int,type varchar(200));
+Query OK, 0 rows affected (0.101 sec)
+
+MariaDB [chemist]> insert into info(sno,roll number,name)values(12,234,'aditya');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'number,name)values(12,234,'aditya')' at line 1
+MariaDB [chemist]> select * from info;
+Empty set (0.002 sec)
+
+MariaDB [chemist]> drop info;
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'info' at line 1
+MariaDB [chemist]> create table hospital(hp_id int primary key auto increment,name varchar(200));
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'auto increment,name varchar(200))' at line 1
+MariaDB [chemist]> create table hospital(hp_id int primary key,name varchar(200));
+Query OK, 0 rows affected (0.083 sec)
+
+MariaDB [chemist]> insert into hospital(name,address)values('xyz','abc');
+ERROR 1054 (42S22): Unknown column 'address' in 'field list'
+MariaDB [chemist]> select * from hospital;
+Empty set (0.001 sec)
+
+MariaDB [chemist]> show databases;
+ERROR 2006 (HY000): MySQL server has gone away
+No connection. Trying to reconnect...
+Connection id:    8
+Current database: chemist
+
++--------------------+
+| Database           |
++--------------------+
+| chemist            |
+| info               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| shop               |
++--------------------+
+7 rows in set (0.007 sec)
+
+MariaDB [chemist]> drop database chemist;
+Query OK, 5 rows affected (0.162 sec)
+
+MariaDB [(none)]> drop database shop;
+Query OK, 1 row affected (0.092 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| info               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
++--------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [(none)]> create database chemist;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| chemist            |
+| info               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [(none)]> drop database chemist;
+Query OK, 0 rows affected (0.002 sec)
+
+MariaDB [(none)]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| info               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
++--------------------+
+5 rows in set (0.001 sec)
+
+MariaDB [(none)]> create database shop;
+Query OK, 1 row affected (0.002 sec)
+
+MariaDB [(none)]> use shop;
+Database changed
+MariaDB [shop]> use test;
+ERROR 1049 (42000): Unknown database 'test'
+MariaDB [shop]> use shop;
+Database changed
+MariaDB [shop]> show tables;
+Empty set (0.001 sec)
+
+MariaDB [shop]> create table product(name varchar(200),price int,type varchar(200));
+Query OK, 0 rows affected (0.085 sec)
+
+MariaDB [shop]> show tables;
++----------------+
+| Tables_in_shop |
++----------------+
+| product        |
++----------------+
+1 row in set (0.001 sec)
+
+MariaDB [shop]> desc product;
++-------+--------------+------+-----+---------+-------+
+| Field | Type         | Null | Key | Default | Extra |
++-------+--------------+------+-----+---------+-------+
+| name  | varchar(200) | YES  |     | NULL    |       |
+| price | int(11)      | YES  |     | NULL    |       |
+| type  | varchar(200) | YES  |     | NULL    |       |
++-------+--------------+------+-----+---------+-------+
+3 rows in set (0.088 sec)
+
+MariaDB [shop]> select * from product;
+Empty set (0.001 sec)
+
+MariaDB [shop]> ByeCtrl-C -- exit!
+
+
+C:\xampp\mysql\bin>cd mysql
+The system cannot find the path specified.
+
+C:\xampp\mysql\bin>mysql.exe -uroot
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 9
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use shop;
+Database changed
+MariaDB [shop]> select * from product;
+Empty set (0.001 sec)
+
+MariaDB [shop]> insert into product values('pencil',10,'stationary');
+Query OK, 1 row affected (0.070 sec)
+
+MariaDB [shop]> insert into product values('shirt',600,'cloth');
+
+Query OK, 1 row affected (0.069 sec)
+
+MariaDB [shop]> select * from product;
++--------+-------+------------+
+| name   | price | type       |
++--------+-------+------------+
+| pencil |    10 | stationary |
+| shirt  |   600 | cloth      |
++--------+-------+------------+
+2 rows in set (0.001 sec)
+
+MariaDB [shop]> insert into product values('pen',10,'stationary');
+Query OK, 1 row affected (0.069 sec)
+
+MariaDB [shop]> select * from product;
++--------+-------+------------+
+| name   | price | type       |
++--------+-------+------------+
+| pencil |    10 | stationary |
+| shirt  |   600 | cloth      |
+| pen    |    10 | stationary |
++--------+-------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [shop]>  select name,type from product;
++--------+------------+
+| name   | type       |
++--------+------------+
+| pencil | stationary |
+| shirt  | cloth      |
+| pen    | stationary |
++--------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [shop]> select name from product;
++--------+
+| name   |
++--------+
+| pencil |
+| shirt  |
+| pen    |
++--------+
+3 rows in set (0.001 sec)
+
+MariaDB [shop]>  select name,price from product;
++--------+-------+
+| name   | price |
++--------+-------+
+| pencil |    10 |
+| shirt  |   600 |
+| pen    |    10 |
++--------+-------+
+3 rows in set (0.001 sec)
+
+MariaDB [shop]>  select * from product;
++--------+-------+------------+
+| name   | price | type       |
++--------+-------+------------+
+| pencil |    10 | stationary |
+| shirt  |   600 | cloth      |
+| pen    |    10 | stationary |
++--------+-------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [shop]> select name as product_Name,price as product_price,type as product_type from product;
++--------------+---------------+--------------+
+| product_Name | product_price | product_type |
++--------------+---------------+--------------+
+| pencil       |            10 | stationary   |
+| shirt        |           600 | cloth        |
+| pen          |            10 | stationary   |
++--------------+---------------+--------------+
+3 rows in set (0.001 sec)
+
+MariaDB [shop]> select * from product;
++--------+-------+------------+
+| name   | price | type       |
++--------+-------+------------+
+| pencil |    10 | stationary |
+| shirt  |   600 | cloth      |
+| pen    |    10 | stationary |
++--------+-------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [shop]> show databases;
++--------------------+
+| Database           |
++--------------------+
+| info               |
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| shop               |
++--------------------+
+6 rows in set (0.001 sec)
+
+MariaDB [shop]> use shop;
+Database changed
+MariaDB [shop]> select * from product;
++--------+-------+------------+
+| name   | price | type       |
++--------+-------+------------+
+| pencil |    10 | stationary |
+| shirt  |   600 | cloth      |
+| pen    |    10 | stationary |
++--------+-------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [shop]>  insert into product values('tv',13,'electronic');
+Query OK, 1 row affected (0.067 sec)
+
+MariaDB [shop]> select * from product;
++--------+-------+------------+
+| name   | price | type       |
++--------+-------+------------+
+| pencil |    10 | stationary |
+| shirt  |   600 | cloth      |
+| pen    |    10 | stationary |
+| tv     |    13 | electronic |
++--------+-------+------------+
+4 rows in set (0.001 sec)
+
+MariaDB [shop]> insert into product values('washingmachine',20000,'electronic'),('shoes',2342,'cloth');
+Query OK, 2 rows affected (0.068 sec)
+Records: 2  Duplicates: 0  Warnings: 0
+
+MariaDB [shop]> select * from product;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
++----------------+-------+------------+
+6 rows in set (0.001 sec)
+
+MariaDB [shop]> insert into product values('why',234');
+    '> Ctrl-C -- exit!
+Bye
+
+C:\xampp\mysql\bin>mysql -uroot
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 10
+Server version: 10.4.28-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> use shop;
+Database changed
+MariaDB [shop]> select * from product;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
++----------------+-------+------------+
+6 rows in set (0.001 sec)
+
+MariaDB [shop]> insert into product(name,price,type)values('sdf',34,'asdfds');
+Query OK, 1 row affected (0.070 sec)
+
+MariaDB [shop]> insert into product(name,price)values('laptop',33434);
+Query OK, 1 row affected (0.005 sec)
+
+MariaDB [shop]>  select * from product;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| sdf            |    34 | asdfds     |
+| laptop         | 33434 | NULL       |
++----------------+-------+------------+
+8 rows in set (0.001 sec)
+
+MariaDB [shop]> insert into product values('pen',34,'dfsdf');
+Query OK, 1 row affected (0.069 sec)
+
+MariaDB [shop]>  select * from product;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| sdf            |    34 | asdfds     |
+| laptop         | 33434 | NULL       |
+| pen            |    34 | dfsdf      |
++----------------+-------+------------+
+9 rows in set (0.001 sec)
+
+MariaDB [shop]>  create table student(name varchar,roll int primary key,branch varchar);
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'roll int primary key,branch varchar)' at line 1
+MariaDB [shop]> isnert into student values('dfs',12,'cse');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'isnert into student values('dfs',12,'cse')' at line 1
+MariaDB [shop]> insert into student values('dfsdf',12,'ce');
+ERROR 1146 (42S02): Table 'shop.student' doesn't exist
+MariaDB [shop]>  select * from product;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| sdf            |    34 | asdfds     |
+| laptop         | 33434 | NULL       |
+| pen            |    34 | dfsdf      |
++----------------+-------+------------+
+9 rows in set (0.001 sec)
+
+MariaDB [shop]> insert into student values('dfs',12,'cse');
+ERROR 1146 (42S02): Table 'shop.student' doesn't exist
+MariaDB [shop]> isnert into student values('dfs',12,'cse');
+ERROR 1064 (42000): You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near 'isnert into student values('dfs',12,'cse')' at line 1
+MariaDB [shop]> create table hospital(hp_id int primary key auto_increment,name varchar(200),address varchar(200));
+Query OK, 0 rows affected (0.084 sec)
+
+MariaDB [shop]> insert into hospital(name,address)values('xyz','abc');
+Query OK, 1 row affected (0.070 sec)
+
+MariaDB [shop]>  select * from product;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| sdf            |    34 | asdfds     |
+| laptop         | 33434 | NULL       |
+| pen            |    34 | dfsdf      |
++----------------+-------+------------+
+9 rows in set (0.001 sec)
+
+MariaDB [shop]> select * from hospital;
++-------+------+---------+
+| hp_id | name | address |
++-------+------+---------+
+|     1 | xyz  | abc     |
++-------+------+---------+
+1 row in set (0.001 sec)
+
+MariaDB [shop]> insert into hospital(hp_id,name,address)values(100,'xyz','abc');
+Query OK, 1 row affected (0.067 sec)
+
+MariaDB [shop]> select * from hospital;
++-------+------+---------+
+| hp_id | name | address |
++-------+------+---------+
+|     1 | xyz  | abc     |
+|   100 | xyz  | abc     |
++-------+------+---------+
+2 rows in set (0.001 sec)
+
+MariaDB [shop]> insert into hospital(name,address)values('uzu','abcdf');
+Query OK, 1 row affected (0.069 sec)
+
+MariaDB [shop]> select * from hospital;
++-------+------+---------+
+| hp_id | name | address |
++-------+------+---------+
+|     1 | xyz  | abc     |
+|   100 | xyz  | abc     |
+|   101 | uzu  | abcdf   |
++-------+------+---------+
+3 rows in set (0.001 sec)
+
+MariaDB [shop]> create table vote(name varchar(200),age int check(age>18));
+Query OK, 0 rows affected (0.087 sec)
+
+MariaDB [shop]> insert into vote values('xyz',11);
+ERROR 4025 (23000): CONSTRAINT `vote.age` failed for `shop`.`vote`
+MariaDB [shop]>  insert into vote values('xyz',19);
+Query OK, 1 row affected (0.069 sec)
+
+MariaDB [shop]> select * from vote;
++------+------+
+| name | age  |
++------+------+
+| xyz  |   19 |
++------+------+
+1 row in set (0.001 sec)
+
+MariaDB [shop]> create table abc(name varchar(200),qulification varchar(200) default 'na',age int);
+Query OK, 0 rows affected (0.084 sec)
+
+MariaDB [shop]> insert into abc(name,age)values('sd',12);
+Query OK, 1 row affected (0.069 sec)
+
+MariaDB [shop]> insert into abc values('sdf','btech',1234);
+Query OK, 1 row affected (0.068 sec)
+
+MariaDB [shop]> select * from abc;
++------+--------------+------+
+| name | qulification | age  |
++------+--------------+------+
+| sd   | na           |   12 |
+| sdf  | btech        | 1234 |
++------+--------------+------+
+2 rows in set (0.001 sec)
+
+MariaDB [shop]> create table xyz(id int,name varchar(200) not null,adress varchar(200));
+Query OK, 0 rows affected (0.087 sec)
+
+MariaDB [shop]> insert into xyz values(12,'abc','sddf');
+Query OK, 1 row affected (0.068 sec)
+
+MariaDB [shop]> insert into xyz values(12,'abc');
+ERROR 1136 (21S01): Column count doesn't match value count at row 1
+MariaDB [shop]> insert into xyz(name,adress)values(12,'abc');
+Query OK, 1 row affected (0.067 sec)
+
+MariaDB [shop]>  select * from xyz;
++------+------+--------+
+| id   | name | adress |
++------+------+--------+
+|   12 | abc  | sddf   |
+| NULL | 12   | abc    |
++------+------+--------+
+2 rows in set (0.001 sec)
+
+MariaDB [shop]> select * from product;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| sdf            |    34 | asdfds     |
+| laptop         | 33434 | NULL       |
+| pen            |    34 | dfsdf      |
++----------------+-------+------------+
+9 rows in set (0.001 sec)
+
+MariaDB [shop]> select sum(price) as Total_price from product;
++-------------+
+| Total_price |
++-------------+
+|       56477 |
++-------------+
+1 row in set (0.001 sec)
+
+MariaDB [shop]>  select sum(price) from product;
++------------+
+| sum(price) |
++------------+
+|      56477 |
++------------+
+1 row in set (0.001 sec)
+
+MariaDB [shop]> select count(price) from product;
++--------------+
+| count(price) |
++--------------+
+|            9 |
++--------------+
+1 row in set (0.001 sec)
+
+MariaDB [shop]> select min(price) from product;
++------------+
+| min(price) |
++------------+
+|         10 |
++------------+
+1 row in set (0.001 sec)
+
+MariaDB [shop]> select avg(price) from product;
++------------+
+| avg(price) |
++------------+
+|  6275.2222 |
++------------+
+1 row in set (0.001 sec)
+
+MariaDB [shop]>  select * from product;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| sdf            |    34 | asdfds     |
+| laptop         | 33434 | NULL       |
+| pen            |    34 | dfsdf      |
++----------------+-------+------------+
+9 rows in set (0.001 sec)
+
+MariaDB [shop]> select * from product where price>2000;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| laptop         | 33434 | NULL       |
++----------------+-------+------------+
+3 rows in set (0.001 sec)
+
+MariaDB [shop]> select * from product where price<2000;
++--------+-------+------------+
+| name   | price | type       |
++--------+-------+------------+
+| pencil |    10 | stationary |
+| shirt  |   600 | cloth      |
+| pen    |    10 | stationary |
+| tv     |    13 | electronic |
+| sdf    |    34 | asdfds     |
+| pen    |    34 | dfsdf      |
++--------+-------+------------+
+6 rows in set (0.001 sec)
+
+MariaDB [shop]> select * from product where name='pen';
++------+-------+------------+
+| name | price | type       |
++------+-------+------------+
+| pen  |    10 | stationary |
+| pen  |    34 | dfsdf      |
++------+-------+------------+
+2 rows in set (0.001 sec)
+
+MariaDB [shop]>  select * from product;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| sdf            |    34 | asdfds     |
+| laptop         | 33434 | NULL       |
+| pen            |    34 | dfsdf      |
++----------------+-------+------------+
+9 rows in set (0.001 sec)
+
+MariaDB [shop]> select * from product order by price asc;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| sdf            |    34 | asdfds     |
+| pen            |    34 | dfsdf      |
+| shirt          |   600 | cloth      |
+| shoes          |  2342 | cloth      |
+| washingmachine | 20000 | electronic |
+| laptop         | 33434 | NULL       |
++----------------+-------+------------+
+9 rows in set (0.001 sec)
+
+MariaDB [shop]> select * from product order by price desc;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| laptop         | 33434 | NULL       |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| shirt          |   600 | cloth      |
+| sdf            |    34 | asdfds     |
+| pen            |    34 | dfsdf      |
+| tv             |    13 | electronic |
+| pencil         |    10 | stationary |
+| pen            |    10 | stationary |
++----------------+-------+------------+
+9 rows in set (0.001 sec)
+
+MariaDB [shop]> select * from product;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| sdf            |    34 | asdfds     |
+| laptop         | 33434 | NULL       |
+| pen            |    34 | dfsdf      |
++----------------+-------+------------+
+9 rows in set (0.001 sec)
+
+MariaDB [shop]> create table rt like product;
+Query OK, 0 rows affected (0.083 sec)
+
+MariaDB [shop]> select * from rt;
+Empty set (0.001 sec)
+
+MariaDB [shop]> insert into rt select * from product;
+Query OK, 9 rows affected (0.069 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+MariaDB [shop]> select * from rt;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| sdf            |    34 | asdfds     |
+| laptop         | 33434 | NULL       |
+| pen            |    34 | dfsdf      |
++----------------+-------+------------+
+9 rows in set (0.001 sec)
+
+MariaDB [shop]> create table my as select * from product;
+Query OK, 9 rows affected (0.097 sec)
+Records: 9  Duplicates: 0  Warnings: 0
+
+MariaDB [shop]> select * from my;
++----------------+-------+------------+
+| name           | price | type       |
++----------------+-------+------------+
+| pencil         |    10 | stationary |
+| shirt          |   600 | cloth      |
+| pen            |    10 | stationary |
+| tv             |    13 | electronic |
+| washingmachine | 20000 | electronic |
+| shoes          |  2342 | cloth      |
+| sdf            |    34 | asdfds     |
+| laptop         | 33434 | NULL       |
+| pen            |    34 | dfsdf      |
++----------------+-------+------------+
+9 rows in set (0.001 sec)
+
+MariaDB [shop]>

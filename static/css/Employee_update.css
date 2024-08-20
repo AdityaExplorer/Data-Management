@@ -1,0 +1,117 @@
+/* Header Styles */
+header {
+    background-color: #433ed1; /* Background color for header */
+    padding: 15px 20px;
+    color: #fff;
+    text-align: center;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Header shadow */
+}
+
+header h1 {
+    margin: 0;
+    font-size: 40px;
+    letter-spacing: 7px;
+    color: #fff;
+}
+
+/* Container Styles */
+.conatiner {
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background color for container */
+}
+
+.content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* White background for content */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow for the content area */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form elements */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+    color: #333; /* Dark color for labels */
+}
+
+input[type="number"],
+input[type="file"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+input[type="file"] {
+    padding: 0;
+}
+
+/* Button Styles */
+.content button {
+    padding: 8px 16px; /* Adjusted padding for a smaller button */
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    display:flex;
+    flex-direction: row; 
+    align-items: center; 
+    justify-content: center;
+    cursor: pointer;
+    color: #fff;
+    background-color: #433ed1; /* Button color */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    width: auto; /* Allow width to adjust based on content */
+    max-width: 200px; /* Optional: Limit maximum width of the button */
+}
+
+button:hover {
+    background-color: #3a2d91; /* Darker button color on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+.content button a {
+    color: #fff;
+    text-decoration: none;
+    display: inline-block; /* Ensure the link behaves correctly inside button */
+}
+
+/* Ensure button content (like icons) aligns properly */
+button .icon {
+    margin-right: 8px; /* Adjust spacing between icon and text */
+}
+
+/* File List Styles */
+#fileList {
+    margin-top: 10px;
+}
+
+#fileList p {
+    margin: 0;
+    color: #555; /* Color for file list text */
+}
+
+/* Result Styles */
+h1 {
+    text-align: center;
+    color: #333; /* Color for result message */
+}
+
+.content .btn{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+}

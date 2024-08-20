@@ -1,0 +1,240 @@
+/* For header */
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    overflow-x: hidden;
+}
+
+/* Header Styles */
+header {
+    width: 100%;
+    height: 80px; /* Decrease height as needed */
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to right, #fff 50%, #433ed1 50%);
+}
+
+header .nm h1 {
+    font-size: 60px; 
+    font-weight: bold;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    color: #000; 
+    letter-spacing: 6px;
+    cursor:none;
+}
+
+header .right-content {
+    position: absolute;
+    right: 0;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    padding-right: 20px;
+    color: #fff; 
+}
+/* CSS for Wrapper and Logo */
+.wrapper {
+    position: absolute;
+    left: 0;
+    width: 50%;
+    height: 100vh;
+    background-color: #433ed1; 
+    display: flex;
+    flex-direction: column; 
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    overflow: hidden;
+    text-align: center;
+}
+
+.logo-icon {
+    margin-bottom: 20px; 
+}
+
+.logo-icon img {
+    width: 100px; 
+    height: auto; 
+}
+
+.static-txt {
+    font-size: 24px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.dynamic-txts {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    font-size: 36px;
+    font-weight: bold;
+    position: relative;
+}
+
+.dynamic-txts li {
+    display: none;
+}
+
+.dynamic-txts li span {
+    display: block;
+    animation: slideIn 1.5s infinite;
+}
+
+@keyframes slideIn {
+    0% {
+        transform: translateY(100%);
+        opacity: 0;
+    }
+    50% {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    100% {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+}
+
+.container {
+    position: absolute;
+    right: 0;
+    width: 50%;
+    height: 100vh;
+    background-color: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.card {
+    background: #fff;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    width: 80%;
+    height: 40vh;
+    /* max-width: 500px; */
+    width: 70vh;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    flex-direction: column;
+}
+
+button {
+    border: none;
+    background-color: #433ed1; 
+    color: #fff;
+    width: 30%;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin: 5px;
+}
+
+button:hover {
+    background-color: #4f4bd1; 
+    transform: scale(1.05);
+}
+
+button a {
+    text-decoration: none;
+    color: #fff;
+}
+
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .card {
+        width: 90%;
+        padding: 15px;
+    }
+}
+
+
+/* For Animated text */
+.containerr {
+    padding: 20px;
+    background-color: #433ed1; 
+    border: 1px solid #ddd; 
+    border-radius: 8px; 
+    text-align: center; 
+    margin: 20px; 
+    font-family: Arial, sans-serif; 
+    overflow: hidden; 
+    display: block; 
+    cursor:not-allowed;
+}
+
+#text {
+    display: inline; 
+    white-space: pre-wrap; 
+    overflow: hidden; 
+    border-right: .15em solid rgb(53, 140, 95); 
+    animation: typing 10s steps(50, end), blink-caret .75s step-end infinite;
+    width: 100%; 
+    margin: 0 auto; 
+}
+
+@keyframes typing {
+    from { width: 0; }
+    to { width: 100%; }
+}
+
+@keyframes blink-caret {
+    from, to { border-color: transparent; }
+    50% { border-color: orange; }
+}
+.marquee-container {
+    width: 100%;
+    background-color: #f9f9f9;
+    border: 1px solid #ccc;
+    padding: 10px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+}
+.marquee-text {
+    font-family: Arial, sans-serif;
+    font-size: 16px;
+    color: #333;
+}
+
+/* Initial hidden state for letters */
+#text span {
+    display: inline-block;
+    opacity: 0; /* Start hidden */
+    transform: translateY(20px); /* Start from below */
+    animation: fadeInUp 1s forwards; /* Animation effect */
+    /* Each letter should have a slight delay to appear one after another */
+    animation-delay: calc(0.1s * var(--i)); /* Delay based on the index */
+}
+
+/* Keyframes for fadeInUp animation */
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

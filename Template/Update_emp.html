@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update_emp</title>
+    <style>
+        * {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+        /* Header Styles */
+header {
+    background-color: #433ed1; /* Background color for header */
+    padding: 15px 20px;
+    color: #fff;
+    display: flex;
+    justify-content: center; /* Center align header content */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* Header shadow */
+}
+
+header .nm {
+    display: flex;
+    gap: 15px; /* Space between links and buttons */
+    align-items: center; /* Center align items vertically */
+}
+
+header .nm a,
+header .nm button {
+    color: #fff;
+    text-decoration: none;
+    font-size: 16px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+}
+
+header .nm a:hover,
+header .nm button:hover {
+    background-color: #3a2d91; /* Darker shade on hover */
+    transform: scale(1.1); /* Scale up on hover */
+}
+
+/* Container Styles */
+.container {
+    padding: 20px;
+    background-color: #f9f9f9; /* Light background color for container */
+}
+
+.content {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    background-color: #fff; /* White background for content */
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Shadow for the content area */
+}
+
+/* Form Styles */
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Space between form elements */
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+label {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333; /* Dark color for labels */
+}
+
+input[type="text"],
+input[type="number"] {
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 20px;
+}
+
+/* Button Container Styles */
+.button-container {
+    display: flex;
+    gap: 10px; /* Space between buttons */
+    justify-content: center; /* Center-align buttons horizontally */
+}
+
+button {
+    padding: 10px 20px; /* Adjusted padding for a larger button */
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    display: flex;
+    flex-direction: row; /* Ensure button contents are arranged in a row */
+    align-items: center; /* Center align items vertically */
+    justify-content: center; /* Center align items horizontally */
+    cursor: pointer;
+    color: #fff;
+    background-color: #433ed1; /* Button color */
+    transition: background-color 0.3s ease, transform 0.3s ease; /* Smooth transitions */
+    width: auto; /* Allow width to adjust based on content */
+    max-width: 200px; /* Optional: Limit maximum width of the button */
+}
+
+button:hover {
+    background-color: #3a2d91; /* Darker button color on hover */
+    transform: scale(1.05); /* Slightly scale up on hover */
+}
+
+button a {
+    color: #fff;
+    text-decoration: none;
+}
+
+/* Result Styles */
+h1 {
+    text-align: center;
+    color: #333; /* Color for result message */
+    margin-top: 20px;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <div class="nm">
+            <!-- <a href="../">Home</a> -->
+            <a href="../add_data">Add Data</a>
+            <a href="../Employee_Delete">Delete Data</a>
+            <a href="../Employee_update">Update Data('only Update files ')</a>
+            <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+            </form>
+            <a href="../dashboard">Back</a>
+
+        </div>
+    </header>
+    <div class="container">
+        <div class="content">
+        <form action="update_emp" method="post">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="sno">Sno</label>
+                <input type="number" name="sno" value="{{Record.sno}}" > <br><br>
+                <label for="name">Name</label>
+                <input type="text" id="name" name="name" placeholder="Enter your name" value="{{Record.name}}" >
+            </div>
+            <div class="form-group">
+                <label for="aadhaar">Aadhaar No</label>
+                <input type="text" id="aadhaar" name="aadhaar" placeholder="Enter your Aadhaar Number" value="{{Record.aadhaar}}"  >
+            </div>
+            <div class="form-group">
+                <label for="mobile">Mobile Number</label>
+                <input type="text" id="mobile" name="mobile" placeholder="Enter your mobile number"  value="{{Record.mobile}}"  >
+            </div>
+            <div class="form-group">
+                <label for="address">Address</label>
+                <input type="text" id="adrs" name="address" placeholder="Enter your address" value="{{Record.address}}"  >
+            </div>
+            
+            <div class="button-container">
+                <button type="submit">Edit Now</button>
+                <button><a href="../data_display">Back</a></button>
+            </div>
+        </form>
+        <h1>{{result}}</h1>
+    </div>
+</div>
+</body>
+</html>

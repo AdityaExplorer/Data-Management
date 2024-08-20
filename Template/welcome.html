@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome_page</title>
+    <link rel="stylesheet" href="../static/css/welcome.css">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+ 
+   
+</head>
+<body>
+    <nav class="nav-bar">
+        <div class="content">
+            <button>
+                <a href="{% url 'change_password' %}" style="text-decoration: none; color: white;">Change Password</a>
+            </button>
+            
+                <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+                </form>
+        </div>
+    </nav>
+    
+    <div class="container">
+        <div class="card">
+            <h1>Welcome! Here You Can Explore  Options</h1>
+            
+    <button>
+        <a href="data_display/" style="text-decoration: none;">View All Data </a>
+    </button>
+    
+    <button >
+        <a href="add_data">Add Data</a>
+    </button>
+    <button >
+        <a href="Employee_Delete">Delete Data</a>
+    </button>
+    <button >
+        <a href="Employee_update">Update Data</a>
+    </button>
+    
+    {% bootstrap_javascript%}
+</body>
+</html>

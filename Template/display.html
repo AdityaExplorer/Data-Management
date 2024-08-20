@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Records</title>
+    <link rel="stylesheet" href="../static/css/display.css">
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+</head>
+<body>
+    <header>
+        <div class="nm">
+            <!-- <a href="../">Home</a> -->
+            <a href="../add_data">Add Data</a>
+            <a href="../Employee_Delete">Delete Data</a>
+            <a href="../Employee_update">Update Data('only Update files ')</a>
+            <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+            </form>
+            <a href="../dashboard">Back</a>
+
+        </div>
+    </header>
+    <center>
+
+        <div class="search-container">
+            <input type="text" id="searchInput" class="search-bar" placeholder="Search by email or name..." value="{{ query }}">
+            <br><br>
+        </div>
+
+        <center>
+            <table id="example">
+                <thead>
+                    <tr>
+                        <th>Sno</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Aadhaar</th>
+                        <th>Mobile</th>
+                        <th>Address</th>
+                        <th>CDR file links</th>
+                        <th>Photo</th>
+                        <!-- <th>Description</th> -->
+                        <th>Action</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for record in processed_records %}
+                    <tr>
+                        <td>{{ record.obj.sno }}</td>
+                        <td>{{ record.obj.name }}</td>
+                        <td>{{ record.obj.email }}</td>
+                        <td>{{ record.obj.aadhaar }}</td>
+                        <td>{{ record.obj.mobile }}</td>
+                        <td>{{ record.obj.address }}</td>
+                        <!-- <td>
+                            {% if record.cdr_files_list %}
+                                {% for file in record.cdr_files_list %}
+                                    
+                                     <a href="{{ file }}" target="_blank">{{ file }}</a><br>
+                                {% endfor %}
+                            {% else %}
+                                No document uploaded
+                            {% endif %}
+                            <button onclick="openPopup('{{record.obj.sno}}')">Add More Files</button>
+                            <button>Delete Particular Files</button>
+
+                        </td> -->
+                        <!-- <td>
+                            {% if record.cdr_files_list %}
+                                {% for file in record.cdr_files_list %}
+                                    <div>
+                                        <a href="{{ file }}" target="_blank">{{ file }}</a>
+                                        <button onclick="deleteFile('{{ record.obj.sno }}', '{{ file|escapejs }}')">
+                                            Delete</button>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                No document uploaded
+                            {% endif %}
+                            <button onclick="openPopup('{{ record.obj.sno }}')">Add More Files</button>
+                        </td> -->
+                        <!-- <td>
+                            {% if record.cdr_files_list %}
+                                {% for file in record.cdr_files_list %}
+                                    <div>
+                                        <a href="{{ file }}" target="_blank">{{ file }}</a>
+                                        <button onclick="deleteFile('{{ record.obj.sno }}', '{{ file|escapejs }}')">
+                                            Delete
+                                        </button>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                No document uploaded
+                            {% endif %}
+                            <button onclick="openPopup('{{ record.obj.sno }}')">Add More Files</button>
+                        </td>
+                         -->
+                         <!-- <td>
+                            {% if record.cdr_files_list %}
+                                {% for file in record.cdr_files_list %}
+                                    <div data-file-name="{{ file|escapejs }}">
+                                        <a href="{{ file }}" target="_blank">{{ file }}</a>
+                                        <button onclick="deleteFile('{{ record.obj.sno }}', '{{ file|escapejs }}')">
+                                            Delete
+                                        </button>
+                                    </div>
+                                {% endfor %}
+                            {% else %}
+                                No document uploaded
+                            {% endif %}
+                            <button onclick="openPopup('{{ record.obj.sno }}')">Add More Files</button>
+                        </td> -->
+                        <td>
+                            {% if record.cdr_files_list %}
+                            {% for file in record.cdr_files_list %}
+                                <a href="{{ file }}" target="_blank">{{ file }}</a><br>
+                                <a class="btn btn-primary" href="#" onclick="handleDeleteClick('{{ forloop.counter0 }}', '{{ file|escapejs }}'); return false;">Delete</a>
+                            {% endfor %}
+                        {% else %}
+                            No document uploaded
+                        {% endif %}
+                        
+                            <button class="btn btn-primary" onclick="openPopup('{{ record.obj.sno }}')">Add More Files</button>
+                            <!-- <button class="btn btn-primary" >
+                                <a class="btn btn-primary" href="{% url 'del_Prti_fl' %}?sno={{ record.obj.sno }}&file={{ record.obj.file }}">Delete Particular Files</a>
+
+                            </button> -->
+                        </td>
+
+    
+    
+    
+                        
+                        <td>
+                            {% if record.obj.document_path %}
+                            <img src="{{ record.obj.document_path }}" alt="Uploaded Image">
+                            {% else %}
+                            <p>No image uploaded</p>
+                            {% endif %}
+                        </td>
+                        <td><a class="btn btn-danger" href="../delete_record?empid={{record.obj.sno }}" onclick="return confirm('Are you sure you want to delete this record?')">Delete</a> |
+                            <a class="btn btn-primary" href="../update_record?empid={{record.obj.sno}}">Edit</a>
+                        </td>
+                       
+                       
+                    </tr>
+                    
+                    {% endfor %}
+                </tbody>
+            </table>
+        </center>
+
+       
+        </div>
+        <!-- Popup Form -->
+<div id="filePopup" class="popup">
+    <div class="popup-content">
+        <span class="close-btn" onclick="closePopup()">&times;</span>
+        <h2>Add More Files</h2>
+        <form id="uploadForm" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            <input type="hidden" id="serialNumber" name="serial_number">
+            <label for="cdrFiles">Select files:</label>
+            <input type="file" id="cdrFiles" name="CDR" multiple><br>
+            <button type="submit">Upload</button>
+        </form>
+    </div>
+</div>
+
+  <!-- Delete Particular Files Popup -->
+
+    </center>
+
+    {% bootstrap_javascript %}
+    <script>
+        document.getElementById('searchInput').addEventListener('input', function () {
+            let input = this.value.toLowerCase();
+            let rows = document.querySelectorAll('table tbody tr');
+            
+            rows.forEach(row => {
+                let cells = row.getElementsByTagName('td');
+                let match = Array.from(cells).some(cell => cell.textContent.toLowerCase().includes(input));
+                row.style.display = match ? '' : 'none';
+            });
+
+            let noRecordsRow = document.querySelector('table tbody tr td[colspan]');
+            if ([...rows].every(row => row.style.display === 'none')) {
+                noRecordsRow.style.display = '';
+            } else {
+                noRecordsRow.style.display = 'none';
+            }
+        });
+    if (window.location.search.includes('result=Record+Deleted+Successfully')) {
+        window.location.reload();  
+    }
+    function refreshPage() {
+        window.location.href = window.location.href.split('?')[0] + '?v=' + new Date().getTime();
+    }
+
+    function openPopup(serialNumber) {
+        document.getElementById('serialNumber').value = serialNumber;
+        document.getElementById('filePopup').style.display = 'flex';
+    }
+
+    function closePopup() {
+        document.getElementById('filePopup').style.display = 'none';
+    }
+// For Adding more files
+    document.getElementById('uploadForm').addEventListener('submit', function(event) {
+        event.preventDefault();
+        const formData = new FormData(this);
+        
+        fetch("{% url 'add_more_files' %}", {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                location.reload(); 
+            } else {
+                alert('Failed to upload files');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+        });
+    });
+    // For Delete particular file
+
+
+const handleDeleteClick = (index,file)=>{
+    console.log(index,file, record.cdr_files_list);
+    
+}
+      </script>
+</body>
+</html>

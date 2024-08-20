@@ -1,0 +1,84 @@
+python -m venv name of the folder(django)
+
+django_1\Scripts\activate 
+pip install django
+
+django-admin startproject website ( to start the project)
+
+cd website
+
+python manage.py startapp name of the application(APP)
+
+
+
+
+python -m django --version
+
+
+python manage.py runserver
+
+Template_Dir=os.path.join(BASE_DIR,'Templates')(in the setting file u have to write it)
+then pass this 
+TEMPLATES = [
+	{
+		'DIRS': [Template_Dir],
+	}
+
+
+# define the path in the Urls.py file #
+
+1.path("",include("Student_Common.erm"(App_Name)),
+
+
+# How to static file # 
+1.create a static folder(in static  folder create css file)
+2. first step normally using <linl> tag (& then set the environment variables in the setting.py file 
+
+Without load static:
+1.Simple using link tag 
+2.Create a Base_Dir in the setting.py file
+
+# For Bootstrap #
+1.pip install django-bootstrap-v5
+2. now in the head section of the page u wnt to add bootstrap
+	a.{% load bootstrap5 %}
+	b.{% bootstrap_css %}
+	c.{% bootstarp_javascript %}
+
+# How to use (include) in Django #
+1.{% include 'directorary_Name'(that u created)then forward slash(/) & file name(that u created)
+
+# {% blockcontent %}
+
+# {% endblock %} 
+
+
+# {% 
+
+
+
+
+# Smpt #
+ EMAIL_USE_TLS=True in the setting.py file
+ EMAIL_HOST='smpt.gmail.com'
+ EMAIL_HOST_USER='rersharma@gmail.com'
+ EMAIL_HOST_PASSWORD=''
+ EMAIL_PORT=587
+
+
+# add header file in the views.py file 
+
+from django.conf import settings
+from django.core.mail import send_mail,email_message()
+
+# to create forms
+
+from django import forms
+from django.contrib.auth import authenticate
+
+case 1:form= UserLoginform()
+    context={'form':form}
+case 2:
+class UserLoginform(forms.Form): // UserLoginForm(deafult name)
+now use context={'form':UserLoginform} to import the form from accounts/froms
+

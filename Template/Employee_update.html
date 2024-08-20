@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update_Page</title>
+    <link rel="stylesheet" href="../static/css/Employee_update.css">
+    {% load bootstrap5 %}
+    {% bootstrap_css %}
+    <style>
+       /* Header Styles */
+
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        width: 90%; /* Adjust container width on smaller screens */
+    }
+    .button-container {
+        flex-direction: column; /* Stack buttons vertically on small screens */
+    }
+    .button-container button {
+        width: 100%; /* Full width for buttons on small screens */
+    }
+}
+
+    </style>
+    
+    
+</head>
+<body>
+
+    
+  
+        <header>
+            <nav-bar>
+                <h1>Only You Can Update Files</h1>
+            </nav-bar>
+        </header>
+        <div class="conatiner">
+            <div class="content">
+            <form id="dataForm" method="post" action="Employee_update" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="form-group">
+        <!-- <label for="sno">Sno</label> -->
+        <input type="number" name="sno" id="sno" value="{{Record.sno}}" placeholder="Enter Sno Number To Update"><br><br>
+        </div>
+        
+        <div class="form-group">
+        <label for="photo">Upload Your Photo</label>
+        <input type="file" id="photo" name="photo" ><br><br>
+        </div>
+        <div class="form-group">
+            <label for="CDR">Upload Your CDR</label>
+            <input type="file" multiple id="CDR" name="CDR" >
+            <div id="fileList"></div>
+        </div>
+        <div class="btn">
+        <button type="submit">Update Now</button>
+        <button ><a href="../data_display">View Data</a></button>
+        <button >
+            <a href="dashboard">Back</a>
+        </button>
+    </div>
+    </form>
+</div>
+</div>
+   
+
+
+        <h1 align="center">{{result}}</h1>
+
+
+
+{% bootstrap_javascript %}
+</body>
+</html>

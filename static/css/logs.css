@@ -1,0 +1,111 @@
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+ }
+ /* Base styles for the body */
+ body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    max-width: 400px;
+    box-sizing: border-box;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    font-weight: bold;
+    color: #333;
+    margin-bottom: 5px;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.form-group .error {
+    color: red;
+    font-size: 14px;
+    margin-top: 5px;
+}
+
+button {
+    background-color: #433ed1;
+    color: #fff;
+    border: none;
+    padding: 10px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 16px;
+    width: 100%;
+    text-align: center;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    margin-top: 10px;
+}
+
+button:hover {
+    background-color: #4f4bd1;
+    transform: scale(1.05);
+}
+
+.button-container {
+    display: flex;
+    flex-direction: row; /* Change to row for horizontal alignment */
+    gap: 10px; /* Space between buttons */
+    margin-top: 20px;
+}
+
+.button-container button {
+    width: 100%; /* Make buttons take full width of the container */
+}
+
+.button-container a {
+    color: white;
+    text-decoration: none;
+}
+
+/* Responsive Styles */
+@media (min-width: 768px) {
+    .button-container {
+        flex-direction: row;
+        justify-content: space-between;
+    }
+    .button-container button {
+        width: auto; /* Let buttons take their content width */
+    }
+}
+
+
+/* Result message styles (if needed) */
+h2.result {
+    text-align: center;
+    margin-top: 20px;
+    color: #333;
+}

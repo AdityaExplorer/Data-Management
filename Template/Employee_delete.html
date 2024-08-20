@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Delete_Page</title>
+    <link rel="stylesheet" href="../static/css/Employee_delete.css">
+</head>
+<body>
+    
+    <header>
+        <div class="nm">
+            <!-- <a href="../">Home</a> -->
+            <a href="../add_data">Add Data</a>
+            <a href="../Employee_Delete">Delete Data</a>
+            <a href="../Employee_update">Update Data('only Update files ')</a>
+            <form method="post" action="{% url 'logout' %}">
+                    {% csrf_token %}
+                    <button type="submit">Logout</button>
+            </form>
+            <a href="../dashboard">Back</a>
+
+        </div>
+    </header>
+        <div class="container">
+
+        <div class="content">
+        <h1>Delete Panel</h1>
+        <form action="Employee_Delete" method="post" onsubmit="return confirm('Are you sure?')">
+            {% csrf_token %}
+            
+            <input type="number" name="sno" placeholder="Enter a serail number which you want to delete"><br><br>
+        <div class="btn">
+            <button>Delete Account</button>
+            <button><a href="../data_display/">View Data</a></button>
+            <button><a href="../dashboard">Back</a></button>
+        </div>
+            
+        </form>
+    </div>
+</div>
+        <h1>{{result}}</h1>
+</body>
+</html>

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>File Deletion</title>
+</head>
+<body>
+    <h1>File Deletion</h1>
+
+    {% if deleted %}
+        <p>The file has been successfully deleted.</p>
+    {% elif not deleted and deleted is not None %}
+        <p>Failed to delete the file or no file selected.</p>
+    {% endif %}
+
+    <form method="post" action="{% url 'del_Prti_fl' %}">
+        {% csrf_token %}
+        <label for="file">Select file to delete:</label>
+        <select id="file" name="file">
+            <option value="">Select a file</option>
+            {% for file in files %}
+                <option value="{{ file }}">{{ file }}</option>
+            {% endfor %}
+        </select>
+        <input type="hidden" name="sno" value="{{ request.GET.sno }}">
+        <button type="submit" class="btn btn-primary">Delete Selected File</button>
+    </form>
+
+    <a href="../data_display">Back to Files List</a>
+
+</body>
+</html>

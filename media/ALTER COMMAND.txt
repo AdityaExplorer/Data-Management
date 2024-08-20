@@ -1,0 +1,9 @@
+alter table  table_name add column_name datatype;
+
+alter table  table_name modify column_name datatype;
+
+alter table  table_name drop column_name datatype;
+
+alter table  table_name change column_name new_name  datatype;
+
+alter table  table_name rename new_table_name;
